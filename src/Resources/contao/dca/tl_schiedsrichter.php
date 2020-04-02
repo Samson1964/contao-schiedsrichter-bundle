@@ -898,7 +898,7 @@ class tl_schiedsrichter extends \Backend
 
 		for($x=0;$x<count($args);$x++)
 		{
-			$args[$x] = \Samson\Helper::getDate($args[$x]);
+			//$args[$x] = \Samson\Helper::getDate($args[$x]);
 		}
 		return $args; 
 	} 
