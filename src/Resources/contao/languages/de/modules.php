@@ -9,5 +9,9 @@
 /**
  * Backend-Modul Übersetzungen
  */
-$GLOBALS["TL_LANG"]["MOD"]["schiedsrichter"][0] = "Schiedsrichter";
-$GLOBALS["TL_LANG"]["MOD"]["schiedsrichter"][1] = "Lizensierte Schiedsrichter";
+$GLOBALS['TL_LANG']['MOD']['schiedsrichter'] = array('Schiedsrichter', 'Lizensierte Schiedsrichter');
+
+/**
+ * Frontendmodule
+ */
+$GLOBALS['TL_LANG']['FMD']['schiedsrichterliste'] = array('Schiedsrichterliste','Schiedsrichterliste'); 

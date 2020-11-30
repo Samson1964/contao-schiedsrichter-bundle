@@ -14,5 +14,12 @@
 $GLOBALS['BE_MOD']['content']['schiedsrichter'] = array
 (
 	'tables'         => array('tl_schiedsrichter'),
-	'icon'           => 'bundles/contaoschiedsrichter/images/icon.png'
+	'icon'           => 'bundles/contaoschiedsrichter/images/icon.png',
+	'import'         => array('Schachbulle\ContaoSchiedsrichterBundle\Classes\Import', 'run'),
 );
+
+/**
+ * Frontend-Module
+ */
+
+$GLOBALS['FE_MOD']['application']['schiedsrichterliste'] = 'Schachbulle\ContaoSchiedsrichterBundle\Module\Schiedsrichterliste';

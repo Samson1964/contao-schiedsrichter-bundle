@@ -48,27 +48,13 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 		),
 		'global_operations' => array
 		(
-			//'import' => array
-			//(
-			//	'label'               => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['import'],
-			//	'href'                => 'key=import',
-			//	'icon'                => 'system/modules/schiedsrichter/assets/images/importCSV.gif',
-			//	'attributes'          => 'onclick="Backend.getScrollOffset();"'
-			//),
-			//'export' => array
-			//(
-			//	'label'               => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['export'],
-			//	'href'                => 'key=export',
-			//	'icon'                => 'system/modules/schiedsrichter/assets/images/exportCSV.gif',
-			//	'attributes'          => 'onclick="Backend.getScrollOffset();"'
-			//),
-			//'exportXLS' => array
-			//(
-			//	'label'               => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['exportXLS'],
-			//	'href'                => 'key=exportXLS',
-			//	'icon'                => 'system/modules/schiedsrichter/assets/images/exportEXCEL.gif',
-			//	'attributes'          => 'onclick="Backend.getScrollOffset();"'
-			//),
+			'import' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['import'],
+				'href'                => 'key=import',
+				'icon'                => 'bundles/contaoschiedsrichter/images/import.png',
+				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['tl_schiedsrichter']['import_confirm'] . '\'))return false;Backend.getScrollOffset()"',
+			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -116,7 +102,7 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{person_legend},anrede,titel,name,vorname,geb_datum,geburtsort;{adresse_legend:hide},strasse,plz,ort;{kontakt_legend:hide},telefon,telefon2,fax,faxk1,faxk2,email,mobil;{lizenz_legend:hide},k,klasse,nr,ausbdat,prue_datum,bestanden;{verein_legend:hide},verband,verein,aktiv,passnr,pkz;{diverses_legend:hide},wahl,rds_d,rds_k,dwz_d,dwz_k,verein_kur,sel,funktion,l,los,pn,tagg,nn_vn,ls,lsr;{fide_legend:hide},fide_id,ro,country,title;{hinweise_legend:hide},bemerkung;{published_legend},published'
+		'default'                     => '{person_legend},anrede,titel,name,vorname,edited;{adresse_legend:hide},strasse,plz,ort;{kontakt_legend:hide},telefon,telefon2,email;{lizenz_legend:hide},klasse,nr,ausbdat,prue_datum;{verein_legend:hide},pkz,verein_kur;{diverses_legend:hide},rds_d,rds_k,dwz_d,dwz_k,sel;{fide_legend:hide},fide_id,country;{hinweise_legend:hide},bemerkung;{published_legend},published'
 	),
 
 	// Base fields in table tl_schiedsrichter
@@ -131,22 +117,25 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['tstamp'],
 			'sql'                     => "int(10) unsigned NOT NULL default '0'"
 		),
-		// K
-		'k' => array
+		// Letzte Änderung
+		'edited' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['k'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['edited'],
 			'inputType'               => 'text',
 			'exclude'                 => true,
-			'search'                  => true,
+			'search'                  => false,
 			'sorting'                 => true,
+			'flag'                    => 8,
 			'filter'                  => false,
-			'sql'                     => "varchar(19) NOT NULL default ''",
 			'eval'                    => array
 			(
-				'mandatory'           => false,
-				'tl_class'            => 'w50'
-			)
+				'tl_class'            => 'w50 wizard',
+				'rgxp'                => 'date',
+				'datepicker'          => true
+			),
+			'sql'                     => "int(10) unsigned NOT NULL default '0'" 
 		),
+		// Vorname
 		// Anrede
 		'anrede' => array
 		(
@@ -205,39 +194,6 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 			'sorting'                 => true,
 			'filter'                  => false,
 			'sql'                     => "varchar(22) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		// Geburtstag
-		'geb_datum' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['geb_datum'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'flag'                    => 8,
-			'filter'                  => false,
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50 wizard',
-				'rgxp'                => 'date',
-				'datepicker'          => true
-			),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'" 
-		),
-		// Geburtsort
-		'geburtsort' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['geburtsort'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(30) NOT NULL default ''",
 			'eval'                    => array
 			(
 				'tl_class'            => 'w50'
@@ -334,98 +290,6 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 				'tl_class'            => 'w50'
 			)
 		),
-		// Fax
-		'fax' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['fax'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(30) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		// Fax
-		'faxk1' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['faxk1'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(30) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		// Fax
-		'faxk2' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['faxk2'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(30) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		// Fax
-		'mobil' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['mobil'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(30) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		// Verein
-		'verein' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['verein'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(30) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		// Verband
-		'verband' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['verband'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'flag'                    => 12,
-			'filter'                  => true,
-			'sql'                     => "varchar(30) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'mandatory'           => false,
-				'tl_class'            => 'w50'
-			)
-		),
 		// PKZ
 		'pkz' => array
 		(
@@ -439,21 +303,6 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 			'eval'                    => array
 			(
 				'tl_class'            => 'w50',
-			)
-		),
-		// Aktiv
-		'aktiv' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['aktiv'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(1) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
 			)
 		),
 		// Klasse
@@ -524,36 +373,6 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 			),
 			'sql'                     => "int(10) unsigned NOT NULL default '0'" 
 		),
-		// Passnummer
-		'passnr' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['passnr'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(9) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		// Wahl
-		'wahl' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['wahl'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(1) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
 		// rds_d
 		'rds_d' => array
 		(
@@ -566,7 +385,9 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 			'sql'                     => "varchar(10) NOT NULL default ''",
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50'
+				'tl_class'            => 'w50 wizard',
+				'rgxp'                => 'date',
+				'datepicker'          => true
 			)
 		),
 		'rds_k' => array
@@ -594,7 +415,9 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 			'sql'                     => "varchar(10) NOT NULL default ''",
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50'
+				'tl_class'            => 'w50 wizard',
+				'rgxp'                => 'date',
+				'datepicker'          => true
 			)
 		),
 		'dwz_k' => array
@@ -625,20 +448,6 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 				'tl_class'            => 'w50'
 			)
 		),
-		'bestanden' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['bestanden'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(2) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
 		'sel' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['sel'],
@@ -647,121 +456,11 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 			'search'                  => true,
 			'sorting'                 => true,
 			'filter'                  => false,
-			'sql'                     => "varchar(2) NOT NULL default ''",
+			'sql'                     => "varchar(20) NOT NULL default ''",
 			'eval'                    => array
 			(
 				'tl_class'            => 'w50'
 			)
-		),
-		'funktion' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['funktion'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(1) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		'l' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['l'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(11) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		'los' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['los'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "int(11) unsigned NOT NULL default '0'",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		'nn_vn' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['nn_vn'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(40) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		'pn' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['pn'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'search'                  => true,
-			'sorting'                 => true,
-			'filter'                  => false,
-			'sql'                     => "varchar(5) NOT NULL default ''",
-			'eval'                    => array
-			(
-				'tl_class'            => 'w50'
-			)
-		),
-		'tagg' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['tagg'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'default'                 => true,
-			'filter'                  => true,
-			'eval'                    => array('tl_class' => 'w50','isBoolean' => true),
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'ls' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['ls'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'default'                 => true,
-			'filter'                  => true,
-			'eval'                    => array('tl_class' => 'w50','isBoolean' => true),
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'lsr' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['lsr'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'default'                 => true,
-			'filter'                  => true,
-			'eval'                    => array('tl_class' => 'w50','isBoolean' => true),
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'ro' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['ro'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'default'                 => true,
-			'filter'                  => true,
-			'eval'                    => array('tl_class' => 'w50','isBoolean' => true),
-			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'fide_id' => array
 		(
@@ -780,16 +479,6 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 		'country' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['country'],
-			'inputType'               => 'text',
-			'exclude'                 => true,
-			'default'                 => true,
-			'filter'                  => true,
-			'eval'                    => array('tl_class' => 'w50','isBoolean' => true),
-			'sql'                     => "char(1) NOT NULL default ''"
-		),
-		'title' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_schiedsrichter']['title'],
 			'inputType'               => 'text',
 			'exclude'                 => true,
 			'default'                 => true,
@@ -898,7 +587,7 @@ class tl_schiedsrichter extends \Backend
 
 		for($x=0;$x<count($args);$x++)
 		{
-			//$args[$x] = \Samson\Helper::getDate($args[$x]);
+			$args[$x] = \Schachbulle\ContaoHelperBundle\Classes\Helper::getDate($args[$x]);
 		}
 		return $args; 
 	} 
