@@ -1,5 +1,10 @@
 # Schiedsrichter-Lizenzen Changelog
 
+## Version 1.1.0 (2021-03-13)
+
+* Add: NewsletterSynchronisation.php für die Synchronisierung der Schiedsrichter mit dem Contao-Newsletter
+* Add: System-Einstellungen für NewsletterSynchronisation
+
 ## Version 1.0.0 (2020-11-30)
 
 * Umbau des Bundles, da die Daten nicht mehr aus Excel importiert werden

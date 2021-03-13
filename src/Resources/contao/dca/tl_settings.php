@@ -3,7 +3,7 @@
 /**
  * palettes
  */
-$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ';{schiedsrichter_legend:hide},schiedsrichter_host,schiedsrichter_db,schiedsrichter_user,schiedsrichter_pass';
+$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ';{schiedsrichter_legend:hide},schiedsrichter_host,schiedsrichter_db,schiedsrichter_user,schiedsrichter_pass,schiedsrichter_newsletter,schiedsrichter_newsletterMail';
 
 /**
  * fields
@@ -52,3 +52,28 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['schiedsrichter_pass'] = array
 		'tl_class'            => 'w50',
 	)
 );
+
+$GLOBALS['TL_DCA']['tl_settings']['fields']['schiedsrichter_newsletter'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['schiedsrichter_newsletter'],
+	'exclude'                 => true,
+	'inputType'               => 'select',
+	'foreignKey'              => 'tl_newsletter_channel.title',
+	'eval'                    => array
+	(
+		'includeBlankOption'  => true,
+		'tl_class'            => 'w50'
+	),
+	'sql'                     => "int(10) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_settings']['fields']['schiedsrichter_newsletterMail'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['schiedsrichter_newsletterMail'],
+	'inputType'               => 'text',
+	'eval'                    => array
+	(
+		'tl_class'            => 'w50',
+	),
+	'sql'                     => "varchar(255) NOT NULL default ''"
+); 
