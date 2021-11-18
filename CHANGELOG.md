@@ -1,5 +1,9 @@
 # Schiedsrichter-Lizenzen Changelog
 
+## Version 1.1.1 (2021-11-18)
+
+* Fix: Import.php - String data, right truncated: 1406 Data too long for column 'rds_d' at row 1 -> tl_schiedsrichter.rds_d und tl_schiedsrichter.dwz_d von 10 auf 11 Byte verlängert
+
 ## Version 1.1.0 (2021-03-13)
 
 * Add: NewsletterSynchronisation.php für die Synchronisierung der Schiedsrichter mit dem Contao-Newsletter
