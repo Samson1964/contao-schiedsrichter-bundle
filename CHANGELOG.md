@@ -1,5 +1,9 @@
 # Schiedsrichter-Lizenzen Changelog
 
+## Version 1.1.3 (2021-11-18)
+
+* Fix: Import.php - Numeric value out of range: 1264 Out of range value for column 'edited' at row 1 -> tl_schiedsrichter.edited von 10 auf 12 Byte verlängert
+
 ## Version 1.1.2 (2021-11-18)
 
 * Fix: tl_schiedsrichter.rds_d und tl_schiedsrichter.dwz_d von 11 auf 12 Byte verlängert
