@@ -382,7 +382,7 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 			'search'                  => true,
 			'sorting'                 => true,
 			'filter'                  => false,
-			'sql'                     => "varchar(11) NOT NULL default ''",
+			'sql'                     => "varchar(12) NOT NULL default ''",
 			'eval'                    => array
 			(
 				'tl_class'            => 'w50 wizard',
@@ -412,7 +412,7 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 			'search'                  => true,
 			'sorting'                 => true,
 			'filter'                  => false,
-			'sql'                     => "varchar(11) NOT NULL default ''",
+			'sql'                     => "varchar(12) NOT NULL default ''",
 			'eval'                    => array
 			(
 				'tl_class'            => 'w50 wizard',

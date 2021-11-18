@@ -1,5 +1,9 @@
 # Schiedsrichter-Lizenzen Changelog
 
+## Version 1.1.2 (2021-11-18)
+
+* Fix: tl_schiedsrichter.rds_d und tl_schiedsrichter.dwz_d von 11 auf 12 Byte verlängert
+
 ## Version 1.1.1 (2021-11-18)
 
 * Fix: Import.php - String data, right truncated: 1406 Data too long for column 'rds_d' at row 1 -> tl_schiedsrichter.rds_d und tl_schiedsrichter.dwz_d von 10 auf 11 Byte verlängert
