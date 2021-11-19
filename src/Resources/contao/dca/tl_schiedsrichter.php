@@ -484,7 +484,7 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 			'default'                 => true,
 			'filter'                  => true,
 			'eval'                    => array('tl_class' => 'w50','isBoolean' => true),
-			'sql'                     => "char(1) NOT NULL default ''"
+			'sql'                     => "varchar(3) NOT NULL default ''"
 		),
 		'bemerkung' => array
 		(

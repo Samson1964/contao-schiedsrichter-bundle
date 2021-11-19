@@ -1,8 +1,12 @@
 # Schiedsrichter-Lizenzen Changelog
 
+## Version 1.1.5 (2021-11-19)
+
+* Fix: String data, right truncated: 1406 Data too long for column 'country' at row 1 (Wert = Deu) -> tl_schiedsrichter.country geändert von char(1) auf varchar(3)
+
 ## Version 1.1.4 (2021-11-19)
 
-* Add: Import.php Funktion mysql_timestamp zur Umwandlung von MySQL-Dateumswerten in Unix-Zeitstempel
+* Add: Import.php Funktion mysql_timestamp zur Umwandlung von MySQL-Datumswerten in Unix-Zeitstempel
 
 ## Version 1.1.3 (2021-11-18)
 
