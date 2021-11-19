@@ -1,5 +1,9 @@
 # Schiedsrichter-Lizenzen Changelog
 
+## Version 1.1.4 (2021-11-19)
+
+* Add: Import.php Funktion mysql_timestamp zur Umwandlung von MySQL-Dateumswerten in Unix-Zeitstempel
+
 ## Version 1.1.3 (2021-11-18)
 
 * Fix: Import.php - Numeric value out of range: 1264 Out of range value for column 'edited' at row 1 -> tl_schiedsrichter.edited von 10 auf 12 Byte verlängert

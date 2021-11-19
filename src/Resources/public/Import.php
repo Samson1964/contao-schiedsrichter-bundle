@@ -48,7 +48,7 @@ class Import
 			$objSchiedsrichter = $objImportDB->prepare('SELECT * FROM `sr-person`')
 			                                 ->execute();
 
-			// Alle alten Datensätze auf unveröffentlicht setzen
+			// Alle alten DatensÃ¤tze auf unverÃ¶ffentlicht setzen
 			$objDB = \Database::getInstance()->prepare('UPDATE tl_schiedsrichter SET published = ?')
 			                                 ->execute(0);
 
@@ -101,7 +101,7 @@ class Import
 					$set = array
 					(
 						'tstamp'     => $zeit,
-						'edited'     => strtotime($objSchiedsrichter->Geaendert),
+						'edited'     => self::mysql_timestamp($objSchiedsrichter->Geaendert),
 						'klasse'     => $objSchiedsrichter->Lizenz,
 						'nr'         => $objSchiedsrichter->Lizenz_Nr,
 						'anrede'     => $objSchiedsrichter->Anrede,
@@ -114,14 +114,14 @@ class Import
 						'telefon'    => $objSchiedsrichter->Telefon1,
 						'telefon2'   => $objSchiedsrichter->Telefon2,
 						'email'      => $objSchiedsrichter->E_Mail1,
-						'ausbdat'    => strtotime($objSchiedsrichter->Ausbildungsdatum),
+						'ausbdat'    => self::mysql_timestamp($objSchiedsrichter->Ausbildungsdatum),
 						'pkz'        => $objSchiedsrichter->PKZ,
-						'rds_d'      => strtotime($objSchiedsrichter->RDS_D),
+						'rds_d'      => self::mysql_timestamp($objSchiedsrichter->RDS_D),
 						'rds_k'      => $objSchiedsrichter->RDS_K,
-						'dwz_d'      => strtotime($objSchiedsrichter->DWZ_D),
+						'dwz_d'      => self::mysql_timestamp($objSchiedsrichter->DWZ_D),
 						'dwz_k'      => $objSchiedsrichter->DWZ_K,
 						'verein_kur' => $objSchiedsrichter->Kuerzel,
-						'prue_datum' => strtotime($objSchiedsrichter->Pruefungsdatum),
+						'prue_datum' => self::mysql_timestamp($objSchiedsrichter->Pruefungsdatum),
 						'sel'        => $objSchiedsrichter->Selektion,
 						'fide_id'    => $objSchiedsrichter->FIDE_ID,
 						'country'    => $objSchiedsrichter->Land,
@@ -158,6 +158,20 @@ class Import
 		{
 			print_r($ex);
 		}
+	}
+
+	/*
+	 * Konvertiert 2021-10-24 03:06:01 (JJJJ-MM-TT HH:MM:SS) oder JJJJ-MM-TT in einen Unix-Zeitstempel
+	*/
+	function mysql_timestamp($string)
+	{
+		$jahr = (int)@substr($string, 0, 4);
+		$monat = (int)@substr($string, 5, 2);
+		$tag = (int)@substr($string, 8, 2);
+		$stunde = (int)@substr($string, 11, 2);
+		$minute = (int)@substr($string, 14, 2);
+		$sekunde = (int)@substr($string, 17, 2);
+		return mktime($stunde, $minute, $sekunde, $monat, $tag, $jahr);
 	}
 
 }
