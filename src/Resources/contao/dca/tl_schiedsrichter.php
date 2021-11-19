@@ -371,7 +371,7 @@ $GLOBALS['TL_DCA']['tl_schiedsrichter'] = array
 				'rgxp'                => 'date',
 				'datepicker'          => true
 			),
-			'sql'                     => "int(10) unsigned NOT NULL default '0'" 
+			'sql'                     => "int(12) unsigned NOT NULL default '0'" 
 		),
 		// rds_d
 		'rds_d' => array

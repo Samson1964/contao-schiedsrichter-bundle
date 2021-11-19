@@ -1,5 +1,9 @@
 # Schiedsrichter-Lizenzen Changelog
 
+## Version 1.1.6 (2021-11-19)
+
+* Fix: Numeric value out of range: 1264 Out of range value for column 'prue_datum' at row 1 (29897161200 = Datum aus Jahr 2917!) -> tl_schiedsrichter.prue_datum geändert von int(10) auf int(12)
+
 ## Version 1.1.5 (2021-11-19)
 
 * Fix: String data, right truncated: 1406 Data too long for column 'country' at row 1 (Wert = Deu) -> tl_schiedsrichter.country geändert von char(1) auf varchar(3)
