@@ -1,5 +1,11 @@
 # Schiedsrichter-Lizenzen Changelog
 
+## Version 1.2.0 (2024-04-18)
+
+* Add: codefog/contao-haste
+* Change: Haste-Toggler statt des normalen Togglers
+* Add: Kompatibilität PHP 8
+
 ## Version 1.1.6 (2021-11-19)
 
 * Fix: Numeric value out of range: 1264 Out of range value for column 'prue_datum' at row 1 (29897161200 = Datum aus Jahr 2917!) -> tl_schiedsrichter.prue_datum geändert von int(10) auf int(12)
